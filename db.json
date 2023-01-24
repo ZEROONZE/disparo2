@@ -1,0 +1,50 @@
+{
+  "rootNode": [
+    {
+      "id": 1,
+      "type": "text",
+      "name": "text",
+      "text": "Lucas souza",
+      "nome": ""
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "name": "text",
+      "text": "re",
+      "nome": "type"
+    },
+    {
+      "id": 12,
+      "type": "text",
+      "name": "text",
+      "text": "ewq",
+      "nome": "type"
+    },
+    {
+      "id": 17,
+      "type": "text",
+      "name": "text",
+      "text": "fereee",
+      "nome": "type"
+    }
+  ],
+  "abc1": [
+    {
+      "method": "PUT",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "id": 2
+    }
+  ],
+  "abc2": [
+    {
+      "id": 3,
+      "type": "options",
+      "name": "text",
+      "text": "",
+      "nome": ""
+    }
+  ]
+}

@@ -1,0 +1,1540 @@
+{
+  "intentions": [
+    {
+      "falarAtendente": {
+        "palavrasChaves": [
+          "falar com atendente",
+          "falar com atendimento humano",
+          "atendente",
+          "humano"
+        ],
+        "action": {},
+        "resposta": ""
+      }
+    }
+  ],
+  "nodes": {
+    "rootError": {
+      "id": "rootError",
+      "type": "text",
+      "name": "error",
+      "key": "teste",
+      "text": "",
+      "end": true
+    },
+    "rootNode": {
+      "id": 1,
+      "type": "text",
+      "name": "welcome",
+      "text": "",
+      "next": "abc1"
+    },
+    "abc1": {
+      "id": "abc1",
+      "type": "options",
+      "name": "ja_cliente",
+      "text": "",
+      "options": [
+        {
+          "id": "1",
+          "name": "cliente",
+          "view": true,
+          "text": "Sim",
+          "descricao": "Já Sou Cliente",
+          "next": "abc1-5"
+        },
+        {
+          "id": "2",
+          "name": "cliente",
+          "view": true,
+          "text": "Não",
+          "descricao": "Ainda não Sou Cliente",
+          "next": "abc5"
+        }
+      ]
+    },
+    "abc1-5": {
+      "id": "abc1",
+      "type": "options",
+      "name": "novoProduto",
+      "text": "",
+      "options": [
+        {
+          "id": "1",
+          "name": "novoProduto",
+          "view": true,
+          "text": "Sim",
+          "descricao": "Sim",
+          "next": "abc5"
+        },
+        {
+          "id": "2",
+          "name": "novoProduto",
+          "view": true,
+          "text": "Não",
+          "descricao": "Não",
+          "next": "abc2"
+        }
+      ]
+    },
+    "abc2": {
+      "id": "abc2",
+      "type": "text",
+      "name": "central",
+      "text": "",
+      "next": "abc3"
+    },
+    "abc3": {
+      "id": "abc3",
+      "type": "text",
+      "name": "ajudei",
+      "text": "Espero ter ajudado. Quando precisar, é só chamar. 👋",
+      "next": "abc4"
+    },
+    "abc4": {
+      "id": "abc4",
+      "type": "text",
+      "name": "finalizado",
+      "text": "Seu atendimento por este canal foi finalizado.",
+      "end": true
+    },
+    "abc5": {
+      "id": "abc5",
+      "type": "options",
+      "name": "atendimento",
+      "text": "Antes de eu te mostrar as ofertas, escolha qual tipo de serviço você está buscando",
+      "options": [
+        {
+          "id": "1",
+          "name": "tipo_servico",
+          "view": true,
+          "text": "Internet Para Casa",
+          "descricao": "🏠",
+          "next": "abc6"
+        },
+        {
+          "id": "2",
+          "name": "tipo_servico",
+          "view": true,
+          "text": "Internet Para empresa",
+          "descricao": "💼",
+          "next": "emp1"
+        }
+      ],
+      "err": "abf1"
+    },
+    "abf1": {
+      "id": "abf1",
+      "type": "text",
+      "name": "nao_tv",
+      "text": "Infelizmente nós só temos planos de internet disponíveis.\nPara ter acesso a outros planos favor entrar em contato pelo 08007301800",
+      "next": "abf2"
+    },
+    "abf2": {
+      "id": "abf2",
+      "type": "options",
+      "name": "atendimento",
+      "text": "Você gostaria de Prosseguir com Atendimento Para contratar um plano de Internet?",
+      "options": [
+        {
+          "id": "1",
+          "name": "tipo_servico",
+          "view": true,
+          "text": "Sim",
+          "descricao": "🏠",
+          "next": "abc5"
+        },
+        {
+          "id": "2",
+          "name": "tipo_servico",
+          "view": true,
+          "text": "Não",
+          "descricao": "💼",
+          "next": "abc3"
+        }
+      ],
+      "err": "abf1"
+    },
+    "abc6": {
+      "id": "abc6",
+      "type": "question",
+      "name": "cep",
+      "action": {
+        "when": "next",
+        "action": "pesquisa_cep"
+      },
+      "text": "Agora, preciso que você digite seu CEP (somente números) para que eu consulte quais ofertas estão disponíveis na sua região. Exemplo: 04808252",
+      "next": "abc6-5",
+      "err": "err001"
+    },
+    "err001": {
+      "id": "err001",
+      "type": "question",
+      "name": "cep",
+      "action": {
+        "when": "next",
+        "action": "pesquisa_cep"
+      },
+      "text": "Não Encontrei o CEP digitado, Por favor digite novamente o CEP correto (somente Números).\nExemplo: 04808252",
+      "next": "abc6-5",
+      "err": "err001"
+    },
+    "abc6-5": {
+      "id": "abc6-5",
+      "type": "text",
+      "name": "cep_ok",
+      "text": "*Encontrei este endereço:*\n\n*CEP:* {{{cep}}}\n*Logradouro:* {{{logradouro}}}\n*Bairro:* {{{bairro}}}\n*Cidade:* {{{localidade}}}\n*UF:* {{{uf}}}",
+      "next": "abc7"
+    },
+    "abc7": {
+      "id": "abc7",
+      "type": "options",
+      "text": "Está Correto?",
+      "name": "cep_ok",
+      "options": [
+        {
+          "id": "1",
+          "name": "cep_ok",
+          "view": true,
+          "text": "Sim",
+          "descricao": "Continuar",
+          "next": "abc9"
+        },
+        {
+          "id": "2",
+          "name": "cep_ok",
+          "view": true,
+          "text": "Não",
+          "descricao": "Editar",
+          "next": "abc8"
+        }
+      ]
+    },
+    "abc8": {
+      "id": "abc8",
+      "type": "question",
+      "name": "cep",
+      "action": {
+        "when": "next",
+        "action": "pesquisa_cep"
+      },
+      "text": "Preciso que você digite seu CEP (somente números) pra que eu consulte quais ofertas estão disponíveis na sua região. Exemplo: 04808252",
+      "next": "abc6-5",
+      "err": "err001"
+    },
+    "abc9": {
+      "id": "abc9",
+      "type": "question",
+      "name": "numeroCasa",
+      "text": "Digite o número da sua residência por favor. \n_Para casa sem número, digite 0_",
+      "next": "abc9-5"
+    },
+    "abc9-5": {
+      "id": "abc9-5",
+      "type": "question",
+      "name": "complemento",
+      "text": "Qual Complemento? ( _pode colocar algo que nos ajude a localizar o endereço_ )",
+      "next": "abc10"
+    },
+    "abc10": {
+      "id": "abc10",
+      "type": "text",
+      "name": "disponibilidade",
+      "action": {
+        "when": "now",
+        "action": "consumir_api",
+        "link": "http://44.207.213.117/api/api-bot-oi.php/consultaViabilidadeOi"
+      },
+      "text": "Vou consultar aqui os serviços disponíveis e posso demorar um pouquinho pra retornar, é só aguardar.",
+      "next": "abc11",
+      "err": "err002"
+    },
+    "err002": {
+      "id": "err002",
+      "type": "text",
+      "name": "fim",
+      "text": "Infelizmente não temos disponibilidade em seu endereço, Mas estamos trabalhando para aumentar a nossa infraestrutura e atender você.",
+      "next": "abc3"
+    },
+    "abc11": {
+      "id": "abc11",
+      "type": "text",
+      "name": "mostrarPlanos",
+      "text": "Temos alguns serviços disponíveis pra você. 😉",
+      "next": "abc12"
+    },
+    "abc12": {
+      "id": "abc12",
+      "type": "options",
+      "name": "Antes",
+      "text": "Mas antes, caso nossa conversa seja interrompida, podemos entrar em contato através do telefone {{{telefone}}} para continuar o contato?",
+      "options": [
+        {
+          "id": "1",
+          "name": "contato_pelo_proprio_fone",
+          "view": true,
+          "text": "Sim",
+          "descricao": "Continuar",
+          "next": "abc14"
+        },
+        {
+          "id": "2",
+          "name": "contato_pelo_proprio_fone",
+          "view": true,
+          "text": "Não",
+          "descricao": "",
+          "next": "abc13"
+        }
+      ]
+    },
+    "abc13": {
+      "id": "abc13",
+      "type": "question",
+      "name": "pegarTelefone",
+      "text": "Qual o número que podemos entrar em contato? Digite apenas números. Exemplo: 11984223311",
+      "next": "abc14"
+    },
+    "abc14": {
+      "id": "abc14",
+      "type": "text",
+      "name": "escolha",
+      "text": "Agora, escolha a oferta que mais combina com você.\nAproveite para garantir a Fibra mais escolhida do país!",
+      "next": "abc15"
+    },
+    "abc15": {
+      "id": "abc15",
+      "type": "text",
+      "name": "planos",
+      "text": "Esses são os planos Oi Internet disponíveis na sua região!",
+      "next": "abc17-1"
+    },
+    "abc17-1": {
+      "id": "abc17-1",
+      "type": "text",
+      "name": "plano1",
+      "text": "*Oi Fibra - 400 Mega* + OI expert - 99,90\n✔ Muita velocidade, qualidade, e estabilidade pra ver vídeos, jogar online e trabalhar de casa.\n✔ Wifi Up Grátis",
+      "next": "abc17-2"
+    },
+    "abc17-2": {
+      "id": "abc17-2",
+      "type": "text",
+      "name": "plano1",
+      "text": "*Oi Fibra - 500 Mega* + OI expert - 119,90\n✔ Ainda mais velocidade pra ver vídeos, jogar online e trabalhar de casa com qualidade e estabilidade.\n✔  Wifi Up Grátis",
+      "next": "abc17"
+    },
+    "abc17": {
+      "id": "abc17",
+      "type": "options",
+      "name": "Plano",
+      "text": "Digite uma das opções que deseja:",
+      "options": [
+        {
+          "id": "1",
+          "name": "plano",
+          "view": true,
+          "text": "400 Mega",
+          "descricao": "",
+          "next": "abc18"
+        },
+        {
+          "id": "2",
+          "name": "plano",
+          "view": true,
+          "text": "500 Mega",
+          "descricao": "",
+          "next": "abc19"
+        }
+      ]
+    },
+    "abc18": {
+      "id": "abc18",
+      "type": "text",
+      "name": "escolhaPlanos",
+      "text": "Antes de continuar, confira os detalhes do seu pedido: \nOi Fibra - 400 Mega + OI expert - 99,90\n✔ Muita velocidade, qualidade, e estabilidade pra ver vídeos, jogar online e trabalhar de casa.\n✔ Wifi Up Grátis\n*VALOR: R$ 99,90*",
+      "next": "abc20"
+    },
+    "abc19": {
+      "id": "abc19",
+      "type": "text",
+      "name": "escolhaPlanos",
+      "text": "Antes de continuar, confira os detalhes do seu pedido: \nOi Fibra - 500 Mega + OI expert - 119,90\n✔ Ainda mais velocidade pra ver vídeos, jogar online e trabalhar de casa com qualidade e estabilidade.\n✔  Wifi Up Grátis\n*VALOR: R$ 119,90*",
+      "next": "abc20"
+    },
+    "abc20": {
+      "id": "abc20",
+      "type": "options",
+      "name": "escolhaPlanos",
+      "text": "Está Correto?",
+      "options": [
+        {
+          "id": "1",
+          "name": "plano_ok",
+          "text": "Sim",
+          "view": true,
+          "descricao": "",
+          "next": "abc21"
+        },
+        {
+          "id": "2",
+          "name": "plano_ok",
+          "text": "Não",
+          "view": true,
+          "descricao": "",
+          "next": "abc17"
+        }
+      ]
+    },
+    "abc21": {
+      "id": "abc21",
+      "type": "text",
+      "name": "pegarTelefone",
+      "text": "Pronto! Agora, vamos precisar de algumas informações rápidas pra fechar seu pedido.\n Não se preocupe, os dados são *confidenciais* e *criptografados* pra sua segurança.",
+      "next": "abc22"
+    },
+    "abc22": {
+      "id": "abc22",
+      "type": "question",
+      "name": "cpf",
+      "action": {
+        "when": "next",
+        "action": "valida_cpf"
+      },
+      "text": "Pra começar, preciso que você digite seu CPF (sem pontos ou traço)",
+      "next": "abc23",
+      "err": "err003"
+    },
+    "err003": {
+      "id": "err003",
+      "type": "question",
+      "name": "cpf",
+      "action": {
+        "when": "next",
+        "action": "valida_cpf"
+      },
+      "text": "Este Não Parece ser um CPF válido, Por Favor, Digite seu CPF (sem pontos ou traço). \n Ex: 00011122234",
+      "next": "abc23",
+      "err": "err003"
+    },
+    "abc23": {
+      "id": "abc23",
+      "type": "question",
+      "name": "email",
+      "action": {
+        "when": "next",
+        "action": "valida_email"
+      },
+      "text": "Digite seu e-mail.\nVou enviar logo mais os detalhes do seu pedido e também sua conta mensal.",
+      "next": "abc24",
+      "err": "err004"
+    },
+    "err004": {
+      "id": "err004",
+      "type": "question",
+      "name": "email",
+      "action": {
+        "when": "next",
+        "action": "valida_email"
+      },
+      "text": "Este Não Parece ser um Email válido, Por Favor, Digite seu Email.",
+      "next": "abc24",
+      "err": "err004"
+    },
+    "abc24": {
+      "id": "abc24",
+      "type": "question",
+      "name": "nomeCompleto",
+      "action": {
+        "when": "next",
+        "action": "valida_nome"
+      },
+      "text": "Qual seu nome completo? _Por favor, digite o nome sem abreviações_.",
+      "next": "abc25",
+      "err": "err005"
+    },
+    "err005": {
+      "id": "err005",
+      "type": "question",
+      "name": "nomeCompleto",
+      "action": {
+        "when": "next",
+        "action": "valida_nome"
+      },
+      "text": "Este Não Parece ser um Nome Real, Por Favor, Digite seu Nome Completo e sem Abreviações.",
+      "next": "abc25",
+      "err": "err005"
+    },
+    "abc25": {
+      "id": "abc25",
+      "type": "text",
+      "name": "quaseFinalizando",
+      "text": "Já estamos quase finalizando seu pedido, só falta algumas informações!",
+      "next": "abc26"
+    },
+    "abc26": {
+      "id": "abc26",
+      "type": "question",
+      "name": "DataNascimento",
+      "action": {
+        "when": "next",
+        "action": "valida_data_nascimento"
+      },
+      "text": "Agora, digite sua data de nascimento. _Exemplo: 04/09/1990_",
+      "next": "abc27",
+      "err": "err006"
+    },
+    "err006": {
+      "id": "err006",
+      "type": "question",
+      "name": "DataNascimento",
+      "action": {
+        "when": "next",
+        "action": "valida_data_nascimento"
+      },
+      "text": "Esta Data de Nascimento Parece estar errada? Por Favor, digite sua data de nascimento. _Exemplo: 04/09/1994_",
+      "next": "abc27",
+      "err": "err006"
+    },
+    "abc27": {
+      "id": "abc27",
+      "type": "question",
+      "name": "nomeMae",
+      "text": "Ok, também vou precisar do nome completo da sua mãe _Por favor, digite o nome sem abreviações_",
+      "next": "abc28"
+    },
+    "err007": {
+      "id": "err007",
+      "type": "question",
+      "name": "nomeMae",
+      "action": {
+        "when": "next",
+        "action": "valida_nome"
+      },
+      "text": "Este não pode ser o nome da sua Mãe, por Favor, digite o nome Real de Sua mae sem abreviações.",
+      "next": "abc28",
+      "err": "err007"
+    },
+    "abc28": {
+      "id": "abc28",
+      "type": "question",
+      "name": "telefone2",
+      "text": "Preciso que você digite um segundo telefone com DDD.\nNossa central vai ligar pra esse número caso a gente não consiga contato com este numero!",
+      "next": "abc29"
+    },
+    "abc29": {
+      "id": "abc29",
+      "type": "text",
+      "name": "dadosinformados",
+      "text": "Legal, estes são os dados pessoais que você informou.\nNome: {{{nomeCompleto}}}\nEmail: {{{email}}}\nCPF: {{{cpf}}}\nData Nascimento: {{{DataNascimento}}}\nNome da Mãe: {{{nomeMae}}}\nTelefone 2: {{{telefone2}}}",
+      "next": "abc30"
+    },
+    "abc30": {
+      "id": "abc30",
+      "type": "options",
+      "name": "confirmar",
+      "text": "Esta Correto:",
+      "options": [
+        {
+          "id": "1",
+          "name": "dados_ok",
+          "text": "Sim",
+          "view": true,
+          "descricao": "",
+          "next": "abc39"
+        },
+        {
+          "id": "2",
+          "name": "dados_ok",
+          "text": "Não",
+          "view": true,
+          "descricao": "",
+          "next": "abc31"
+        }
+      ]
+    },
+    "abc31": {
+      "id": "abc31",
+      "type": "options",
+      "text": " Qual dado você Gostaria de Alterar?",
+      "name": "confirmar",
+      "options": [
+        {
+          "id": "1",
+          "name": "nomeCompleto",
+          "text": " Alterar Nome",
+          "view": true,
+          "descricao": "Nome Completo",
+          "next": "abc32"
+        },
+        {
+          "id": "2",
+          "name": "email",
+          "text": "Alterar Email",
+          "view": true,
+          "descricao": "Email",
+          "next": "abc33"
+        },
+        {
+          "id": "3",
+          "name": "DataNascimento",
+          "text": "Alterar Data de Nascimento",
+          "view": true,
+          "descricao": "Data de Nascimento",
+          "next": "abc34"
+        },
+        {
+          "id": "4",
+          "name": "nomeMae",
+          "text": "Alterar Nome da Mãe",
+          "view": true,
+          "descricao": "Nome da Mae",
+          "next": "abc35"
+        },
+        {
+          "id": "5",
+          "name": "cpf",
+          "text": "Alterar CPF",
+          "view": true,
+          "descricao": "CPF",
+          "next": "abc37"
+        },
+        {
+          "id": "6",
+          "name": "nenhum",
+          "text": "Continuar",
+          "view": true,
+          "descricao": "Nenhum",
+          "next": "abc100"
+        }
+      ]
+    },
+    "abc32": {
+      "id": "abc32",
+      "type": "question",
+      "name": "nomeCompleto",
+      "action": {
+        "when": "next",
+        "action": "valida_nome"
+      },
+      "text": "Qual seu nome completo? _Por favor, digite o nome sem abreviações_.",
+      "next": "abc29",
+      "err": "err005"
+    },
+    "abc33": {
+      "id": "abc33",
+      "type": "question",
+      "name": "email",
+      "action": {
+        "when": "next",
+        "action": "valida_email"
+      },
+      "text": "Digite seu e-mail.\nVou enviar logo mais os detalhes do seu pedido e também sua conta mensal.",
+      "next": "abc29",
+      "err": "err004"
+    },
+    "abc34": {
+      "id": "abc26",
+      "type": "question",
+      "name": "DataNascimento",
+      "action": {
+        "when": "next",
+        "action": "valida_data_nascimento"
+      },
+      "text": "Agora, digite sua data de nascimento. _Exemplo: 04/09/1990_",
+      "next": "abc29",
+      "err": "err006"
+    },
+    "abc35": {
+      "id": "abc35",
+      "type": "question",
+      "name": "nomeMae",
+      "action": {
+        "when": "next",
+        "action": "valida_nome"
+      },
+      "text": "Ok, também vou precisar do nome completo da sua mãe_Por favor, digite o nome sem abreviações_",
+      "next": "abc29",
+      "err": "err007"
+    },
+    "abc36": {
+      "id": "abc36",
+      "type": "question",
+      "name": "telefone2",
+      "text": "Preciso que você digite um segundo telefone com DDD.\nNossa central vai ligar pra esse número caso a gente não consiga contato com este numero!",
+      "next": "abc29"
+    },
+    "abc37": {
+      "id": "abc37",
+      "type": "question",
+      "name": "cpf",
+      "action": {
+        "when": "next",
+        "action": "valida_cpf"
+      },
+      "text": "Pronto, Pode digitar o seu CPF (sem pontos ou traço)!",
+      "next": "abc29",
+      "err": "err003"
+    },
+    "abc39": {
+      "id": "abc39",
+      "type": "options",
+      "name": "pagamento",
+      "text": "Estamos quase finalizando seu pedido!Você pode cadastrar o débito automático e ter a sua conta paga sempre em dia. Quer fazer isto agora? 💳",
+      "options": [
+        {
+          "id": "1",
+          "name": "debito",
+          "text": "Sim",
+          "view": true,
+          "footer": "ativar Debito automatico",
+          "next": "abc40"
+        },
+        {
+          "id": "2",
+          "name": "debito",
+          "text": "Agora Não",
+          "view": true,
+          "descricao": "",
+          "next": "abc44-5"
+        }
+      ],
+      "err": "abf3"
+    },
+    "abf3": {
+      "id": "abf3",
+      "type": "text",
+      "name": "error",
+      "text": "Infelizmente nós so temos essas duas Opções de Pagamento Boleto ou Débito em Conta",
+      "next": "abc29"
+    },
+    "abf4": {
+      "id": "abf4",
+      "type": "options",
+      "name": "pagamento",
+      "text": "Por Favor Escolha Como deseja Pagar a Sua Conta: ",
+      "options": [
+        {
+          "id": "1",
+          "name": "debito",
+          "text": "Débito Automático",
+          "view": true,
+          "footer": "ativar Debito automatico",
+          "next": "abc40"
+        },
+        {
+          "id": "2",
+          "name": "debito",
+          "text": "Boleto",
+          "view": true,
+          "descricao": "",
+          "next": "abc44-5"
+        }
+      ],
+      "err": "abf3"
+    },
+    "abc40": {
+      "id": "abc40",
+      "type": "options",
+      "name": "bancos",
+      "text": "Ótimo, Trabalhamos com os seguintes bancos: \nQual deles Você Prefere?",
+      "options": [
+        {
+          "id": "1",
+          "name": "banco",
+          "text": "Itaú",
+          "descricao": "",
+          "view": true,
+          "next": "abc41"
+        },
+        {
+          "id": "2",
+          "name": "banco",
+          "text": "Banco do Brasil",
+          "descricao": "",
+          "view": true,
+          "next": "abc41"
+        },
+        {
+          "id": "3",
+          "name": "banco",
+          "text": "Santander",
+          "descricao": "",
+          "view": true,
+          "next": "abc41"
+        }
+      ],
+      "err": "abf5"
+    },
+    "abf5": {
+      "id": "abf5",
+      "type": "text",
+      "name": "error",
+      "text": "Até o Momento, nós só temos estes bancos disponiveis para voce!",
+      "next": "abf6"
+    },
+    "abf6": {
+      "id": "abf6",
+      "type": "options",
+      "name": "pagamento",
+      "text": "Gostaria de Seguir com pagamento Pelo Débito em Conta? ",
+      "options": [
+        {
+          "id": "1",
+          "name": "debito",
+          "text": "Sim",
+          "view": true,
+          "footer": "ativar Debito automatico",
+          "next": "abc40"
+        },
+        {
+          "id": "2",
+          "name": "debito",
+          "text": "Não, Quero Boleto",
+          "view": true,
+          "descricao": "",
+          "next": "abc44-5"
+        }
+      ]
+    },
+    "abc41": {
+      "id": "abc41",
+      "type": "question",
+      "name": "agencia",
+      "text": "Digite a sua agência (sem o digito)",
+      "next": "abc42"
+    },
+    "abc42": {
+      "id": "abc42",
+      "type": "question",
+      "name": "conta",
+      "text": "Digite a sua conta (sem o digito)",
+      "next": "abc43"
+    },
+    "abc43": {
+      "id": "abc43",
+      "type": "question",
+      "name": "digito",
+      "text": "Qual o digito da sua conta? _Digite apenas o número_ Ex. 1",
+      "next": "abc44-5"
+    },
+    "abc44-5": {
+      "id": "abc44-5",
+      "type": "text",
+      "name": "info",
+      "text": "Certo, Antes de Prosseguir, eu preciso te informar que para opção de pagamento em *Boleto* existe uma adição de R$ 20 no valor do produto!\n\n_Essa é uma iniciativa com intuito de reduzir a utilização de papel. Assim, ajudamos a preservar nossas arvores e florestas._",
+      "next": "abc44-6"
+    },
+    "abc44-6": {
+      "id": "abc44-6",
+      "type": "options",
+      "name": "continuar_boleto",
+      "text": "Gostaria de Continuar com pagamento em Boleto ? ",
+      "options": [
+        {
+          "id": "1",
+          "name": "continuar_boleto",
+          "text": "Sim",
+          "descricao": "",
+          "view": true,
+          "next": "abc44"
+        },
+        {
+          "id": "2",
+          "name": "continuar_boleto",
+          "text": "Não",
+          "descricao": "Data",
+          "view": true,
+          "next": "abf4"
+        }
+      ]
+    },
+    "abc44": {
+      "id": "abc44",
+      "type": "options",
+      "name": "bancos",
+      "text": "Qual a melhor data de vencimento pra sua conta? \nEscolha entre essas opções:",
+      "options": [
+        {
+          "id": "1",
+          "name": "dia_vencimento",
+          "text": "Dia 02",
+          "descricao": "Data",
+          "view": true,
+          "next": "abc45"
+        },
+        {
+          "id": "2",
+          "name": "dia_vencimento",
+          "text": "Dia 07",
+          "descricao": "Data",
+          "view": true,
+          "next": "abc45"
+        },
+        {
+          "id": "3",
+          "name": "dia_vencimento",
+          "text": "Dia 16",
+          "descricao": "Data",
+          "view": true,
+          "next": "abc45"
+        }
+      ],
+      "err": "abf7"
+    },
+    "abf7": {
+      "id": "abf7",
+      "type": "text",
+      "name": "info",
+      "text": "Ate o momento, nós só temos estas datas Diponiveis",
+      "next": "abc44"
+    },
+    "abc45": {
+      "id": "abc45",
+      "type": "text",
+      "name": "info",
+      "text": "Neste plano a conta vai direto pro seu e-mail. Você vai receber a conta no e-mail informado antes: {{{email}}}",
+      "next": "abc46"
+    },
+    "abc46": {
+      "id": "abc46",
+      "type": "text",
+      "name": "infoInstalacao",
+      "text": "Agora, sobre a instalação. Escolha 2 opções de dias da semana, em ordem de preferência, pra receber o técnico. Vamos marcar pra data mais próxima disponível, só não pode ser domingo. ",
+      "next": "abc47"
+    },
+    "abc47": {
+      "id": "abc47",
+      "type": "api",
+      "name": "primeiraDataInstalacao",
+      "action": {
+        "when": "now",
+        "action": "consumir_api",
+        "link": "http://44.207.213.117/api/api-bot-oi.php/consultaDatasOi"
+      },
+      "text": "Escolha a Primeira Data de Instalação Por Favor",
+      "next": "abc47-5",
+      "err": "err008"
+    },
+    "abc47-5": {
+      "id": "abc46",
+      "type": "text",
+      "name": "validando1",
+      "action": {
+        "when": "now",
+        "action": "consumir_api",
+        "link": "http://44.207.213.117/api/api-bot-oi.php/ValidarData?primeiraDataInstalacao"
+      },
+      "text": "",
+      "next": "abc48",
+      "err": "err009"
+    },
+    "abc48": {
+      "id": "abc48",
+      "type": "options",
+      "name": "primeiroPeriodoInstalacao",
+      "text": "Qual período você prefere para a primeira data?",
+      "options": [
+        {
+          "id": "1",
+          "name": "primeiroPeriodoInstalacao",
+          "text": "Manhã",
+          "view": true,
+          "next": "abc49"
+        },
+        {
+          "id": "2",
+          "name": "primeiroPeriodoInstalacao",
+          "text": "Tarde",
+          "view": true,
+          "next": "abc49"
+        }
+      ]
+    },
+    "abc49": {
+      "id": "abc49",
+      "type": "api",
+      "name": "segundaDataInstalacao",
+      "action": {
+        "when": "now",
+        "action": "consumir_api",
+        "link": "http://44.207.213.117/api/api-bot-oi.php/consultaDatasOi"
+      },
+      "text": "Escolha a Segunda Data de Instalação Por Favor",
+      "next": "abc50-5",
+      "err": "err008"
+    },
+    "abc50-5": {
+      "id": "abc50-5",
+      "type": "text",
+      "name": "validando2",
+      "action": {
+        "when": "now",
+        "action": "consumir_api",
+        "link": "http://44.207.213.117/api/api-bot-oi.php/ValidarData?segundaDataInstalacao"
+      },
+      "text": "",
+      "next": "abc50",
+      "err": "err010"
+    },
+    "abc50": {
+      "id": "abc50",
+      "type": "options",
+      "name": "segundoPeriodoInstalacao",
+      "text": "Qual período você prefere para a segunda data?",
+      "options": [
+        {
+          "id": "1",
+          "name": "segundoPeriodoInstalacao",
+          "text": "Manhã",
+          "view": true,
+          "next": "abc51"
+        },
+        {
+          "id": "2",
+          "name": "segundoPeriodoInstalacao",
+          "text": "Tarde",
+          "view": true,
+          "next": "abc51"
+        }
+      ]
+    },
+    "err008": {
+      "id": "err008",
+      "type": "text",
+      "name": "info",
+      "text": "Estou com uma Instabilidade em Meu Sistema e não consigo Buscar as datas disponiveis para Instalação.\n Mas não se preocupe, vamos prosseguir sem e em breve alguém da equipe da OI entrará em com você para fazer o agendamento!",
+      "next": "abc51"
+    },
+    "err009": {
+      "id": "err009",
+      "type": "text",
+      "name": "info",
+      "text": "Esta não parece ser umas Das opções que te dei. !",
+      "next": "abc47"
+    },
+    "err010": {
+      "id": "err010",
+      "type": "text",
+      "name": "info",
+      "text": "Esta não parece ser umas Das opções que te dei. !",
+      "next": "abc49"
+    },
+    "abc51": {
+      "id": "abc51",
+      "type": "options",
+      "name": "termosCondicoes",
+      "text": "Antes de terminar, você precisa concordar com os Termos e Condições de Uso da OI Termos e Condições de Uso: *https://bit.ly/OiFibraTermos*",
+      "options": [
+        {
+          "id": "1",
+          "name": "termosCondicoes",
+          "text": "Concordo",
+          "view": true,
+          "next": "abc53"
+        },
+        {
+          "id": "2",
+          "name": "termosCondicoes",
+          "text": "Discordo",
+          "view": true,
+          "next": "abc52"
+        }
+      ]
+    },
+    "abc52": {
+      "id": "abc52",
+      "type": "options",
+      "name": "termosCondicoes",
+      "text": "Infelizmente para prosseguir com sua assinatura, precisamos do seu aceite, tem certeza que não concorda com os termos e condições de Uso? *https://bit.ly/OiFibraTermos*",
+      "options": [
+        {
+          "id": "1",
+          "name": "termosCondicoes",
+          "text": "Concordo",
+          "view": true,
+          "next": "abc53"
+        },
+        {
+          "id": "2",
+          "name": "termosCondicoes",
+          "text": "Discordo",
+          "view": true,
+          "next": "abc3"
+        }
+      ]
+    },
+    "abc53": {
+      "id": "abc53",
+      "type": "text",
+      "name": "info",
+      "text": "Tudo certo! Seu pedido foi recebido e está em análise 😎\n\nVocê escolheu:\n{{{primeiraDataInstalacao}}} - {{{primeiroPeriodoInstalacao}}}\n{{{segundaDataInstalacao}}} - {{{segundoPeriodoInstalacao}}}\nComo possíveis dias para instalação. Nossa central vai entrar em contato com você caso precise confirmar alguma informação.",
+      "next": "abc54"
+    },
+    "abc54": {
+      "id": "abc54",
+      "type": "text",
+      "name": "info",
+      "text": "Você vai receber a confirmação por SMS e um e-mail pra acompanhar seu pedido.",
+      "next": "abc100"
+    },
+    "emp1": {
+      "id": "emp1",
+      "type": "question",
+      "name": "cep",
+      "action": {
+        "when": "next",
+        "action": "pesquisa_cep"
+      },
+      "text": "Agora, preciso que você digite seu CEP da empresa (somente números) para que eu consulte quais ofertas estão disponíveis na sua região. Exemplo: 04808252",
+      "next": "emp1-5",
+      "err": "emp1err001"
+    },
+    "emp1err001": {
+      "id": "emp1err001",
+      "type": "question",
+      "name": "cep",
+      "action": {
+        "when": "next",
+        "action": "pesquisa_cep"
+      },
+      "text": "Não Encontrei o CEP digitado, Por favor digite novamente o CEP correto (somente Números).\nExemplo: 04808252",
+      "next": "emp1-5",
+      "err": "emp1err001"
+    },
+    "emp1-5": {
+      "id": "emp1-5",
+      "type": "text",
+      "name": "cep_ok",
+      "text": "*Encontrei este endereço:*\n\n*CEP:* {{{cep}}}\n*Logradouro:* {{{logradouro}}}\n*Bairro:* {{{bairro}}}\n*Cidade:* {{{localidade}}}\n*UF:* {{{uf}}}",
+      "next": "emp2"
+    },
+    "emp2": {
+      "id": "abc7",
+      "type": "options",
+      "text": "Está Correto?",
+      "name": "cep_ok",
+      "options": [
+        {
+          "id": "1",
+          "name": "cep_ok",
+          "view": true,
+          "text": "Sim",
+          "descricao": "Continuar",
+          "next": "emp4"
+        },
+        {
+          "id": "2",
+          "name": "cep_ok",
+          "view": true,
+          "text": "Não",
+          "descricao": "Editar",
+          "next": "emp3"
+        }
+      ]
+    },
+    "emp3": {
+      "id": "emp3",
+      "type": "question",
+      "name": "cep",
+      "action": {
+        "when": "next",
+        "action": "pesquisa_cep"
+      },
+      "text": "Preciso que você digite seu CEP (somente números) pra que eu consulte quais ofertas estão disponíveis na sua região. Exemplo: 04808252",
+      "next": "emp1-5",
+      "err": "emp1err001"
+    },
+    "emp4": {
+      "id": "emp4",
+      "type": "question",
+      "name": "numeroCasa",
+      "text": "Digite o número da empresa por favor. \n_Para sem número, digite 0_",
+      "next": "emp4-5"
+    },
+    "emp4-5": {
+      "id": "emp4-5",
+      "type": "question",
+      "name": "complemento",
+      "text": "Qual Complemento? ( _pode colocar algo que nos ajude a localizar o endereço_ )",
+      "next": "emp10"
+    },
+    "emp10": {
+      "id": "emp10",
+      "type": "text",
+      "name": "disponibilidade",
+      "action": {
+        "when": "now",
+        "action": "consumir_api",
+        "link": "http://44.207.213.117/api/api-bot-oi.php/consultaViabilidadeOi"
+      },
+      "text": "Vou consultar aqui os serviços disponíveis e posso demorar um pouquinho pra retornar, é só aguardar.",
+      "next": "emp11",
+      "err": "emp1err002"
+    },
+    "emp1err002": {
+      "id": "err002",
+      "type": "text",
+      "name": "fim",
+      "text": "Infelizmente não temos disponibilidade em seu endereço, Mas estamos trabalhando para aumentar a nossa infraestrutura e atender você.",
+      "next": "abc3"
+    },
+    "emp11": {
+      "id": "emp11",
+      "type": "text",
+      "name": "mostrarPlanos",
+      "text": "Temos alguns serviços disponíveis pra você. 😉",
+      "next": "emp12"
+    },
+    "emp12": {
+      "id": "emp12",
+      "type": "options",
+      "name": "Antes",
+      "text": "Mas antes, caso nossa conversa seja interrompida, podemos entrar em contato através do telefone {{{telefone}}} para continuar o contato?",
+      "options": [
+        {
+          "id": "1",
+          "name": "contato_pelo_proprio_fone",
+          "view": true,
+          "text": "Sim",
+          "descricao": "Continuar",
+          "next": "emp14"
+        },
+        {
+          "id": "2",
+          "name": "contato_pelo_proprio_fone",
+          "view": true,
+          "text": "Não",
+          "descricao": "",
+          "next": "emp13"
+        }
+      ]
+    },
+    "emp13": {
+      "id": "emp13",
+      "type": "question",
+      "name": "pegarTelefone",
+      "text": "Qual o número que podemos entrar em contato? Digite apenas números. Exemplo: 11984223311",
+      "next": "emp14"
+    },
+    "emp14": {
+      "id": "emp14",
+      "type": "text",
+      "name": "escolha",
+      "text": "Agora, escolha a oferta que mais combina com você.\nAproveite para garantir a Fibra mais escolhida do país!",
+      "next": "emp15"
+    },
+    "emp15": {
+      "id": "emp15",
+      "type": "text",
+      "name": "planos",
+      "text": "Esses são os planos Oi Internet disponíveis na sua região!",
+      "next": "emp17-1"
+    },
+    "emp17-1": {
+      "id": "emp17-1",
+      "type": "text",
+      "name": "plano1",
+      "text": "*Oi Fibra - 400 Mega* + OI expert - 99,90\n✔ Muita velocidade, qualidade, e estabilidade pra ver vídeos, jogar online e trabalhar de casa.\n✔ Wifi Up Grátis",
+      "next": "emp17-2"
+    },
+    "emp17-2": {
+      "id": "emp17-2",
+      "type": "text",
+      "name": "plano1",
+      "text": "*Oi Fibra - 500 Mega* + OI expert - 119,90\n✔ Ainda mais velocidade pra ver vídeos, jogar online e trabalhar de casa com qualidade e estabilidade.\n✔  Wifi Up Grátis",
+      "next": "emp17"
+    },
+    "emp17": {
+      "id": "emp17",
+      "type": "options",
+      "name": "Plano",
+      "text": "Digite uma das opções que deseja:",
+      "options": [
+        {
+          "id": "1",
+          "name": "plano",
+          "view": true,
+          "text": "400 Mega",
+          "descricao": "*Oi Fibra - 400 Mega* + OI expert - 99,90\n✔ Muita velocidade, qualidade, e estabilidade pra ver vídeos, jogar online e trabalhar de casa.\n✔ Wifi Up Grátis",
+          "next": "emp18"
+        },
+        {
+          "id": "2",
+          "name": "plano",
+          "view": true,
+          "text": "500 Mega",
+          "descricao": "*Oi Fibra - 500 Mega* + OI expert - 119,90\n✔ Ainda mais velocidade pra ver vídeos, jogar online e trabalhar de casa com qualidade e estabilidade.\n✔  Wifi Up Grátis",
+          "next": "emp19"
+        }
+      ]
+    },
+    "emp18": {
+      "id": "emp18",
+      "type": "text",
+      "name": "escolhaPlanos",
+      "text": "Antes de continuar, confira os detalhes do seu pedido: \nOi Fibra - 400 Mega + OI expert - 99,90\n✔ Muita velocidade, qualidade, e estabilidade pra ver vídeos, jogar online e trabalhar de casa.\n✔ Wifi Up Grátis\n*VALOR: R$ 99,90*",
+      "next": "emp20"
+    },
+    "emp19": {
+      "id": "emp19",
+      "type": "text",
+      "name": "escolhaPlanos",
+      "text": "Antes de continuar, confira os detalhes do seu pedido: \nOi Fibra - 500 Mega + OI expert - 119,90\n✔ Ainda mais velocidade pra ver vídeos, jogar online e trabalhar de casa com qualidade e estabilidade.\n✔  Wifi Up Grátis\n*VALOR: R$ 119,90*",
+      "next": "emp20"
+    },
+    "emp20": {
+      "id": "abc20",
+      "type": "options",
+      "name": "escolhaPlanos",
+      "text": "Está Correto?",
+      "options": [
+        {
+          "id": "1",
+          "name": "plano_ok",
+          "text": "Sim",
+          "view": true,
+          "descricao": "",
+          "next": "emp21"
+        },
+        {
+          "id": "2",
+          "name": "plano_ok",
+          "text": "Não",
+          "view": true,
+          "descricao": "",
+          "next": "emp17"
+        }
+      ]
+    },
+    "emp21": {
+      "id": "emp21",
+      "type": "text",
+      "name": "aleatorio",
+      "text": "Pronto! Agora, vamos precisar de algumas informações rápidas pra fechar seu pedido.\n Não se preocupe, os dados são *confidenciais* e *criptografados* pra sua segurança.",
+      "next": "emp22"
+    },
+    "emp22": {
+      "id": "emp22",
+      "type": "question",
+      "name": "cnpj",
+      "action": {
+        "when": "next",
+        "action": "valida_cnpj"
+      },
+      "text": "Pra começar, preciso que você digite o cnpj da Sua Empresa (sem pontos ou traço)",
+      "next": "emp23",
+      "err": "empErr003"
+    },
+    "empErr003": {
+      "id": "empErr003",
+      "type": "question",
+      "name": "cnpj",
+      "action": {
+        "when": "next",
+        "action": "valida_cnpj"
+      },
+      "text": "Este Não Parece ser um CNPJ válido, Por Favor, Digite o CNPJ (sem pontos ou traço). \n",
+      "next": "emp23",
+      "err": "empErr003"
+    },
+    "emp23": {
+      "id": "emp23",
+      "type": "question",
+      "name": "razaoSocial",
+      "text": "Digite Por Favor a Razão Social (nome) da Sua empresa:",
+      "next": "emp24"
+    },
+    "emp24": {
+      "id": "emp24",
+      "type": "question",
+      "name": "responsavel",
+      "text": "Agora preciso saber quem sera o responsavel pela instalação: (_nome - cargo_) ",
+      "next": "emp26"
+    },
+    "emp26": {
+      "id": "emp26",
+      "type": "question",
+      "name": "email",
+      "action": {
+        "when": "next",
+        "action": "valida_email"
+      },
+      "text": "Digite seu e-mail.\nVou enviar logo mais os detalhes do seu pedido e também sua conta mensal.",
+      "next": "emp27",
+      "err": "empErr004"
+    },
+    "empErr004": {
+      "id": "empErr004",
+      "type": "question",
+      "name": "email",
+      "action": {
+        "when": "next",
+        "action": "valida_email"
+      },
+      "text": "Este Não Parece ser um Email válido, Por Favor, Digite seu Email.",
+      "next": "emp27",
+      "err": "empErr004"
+    },
+    "emp27": {
+      "id": "emp27",
+      "type": "question",
+      "name": "telefone2",
+      "text": "Preciso que você digite um segundo telefone com DDD.\nNossa central vai ligar pra esse número caso a gente não consiga contato com este numero!",
+      "next": "emp29"
+    },
+    "emp29": {
+      "id": "emp29",
+      "type": "text",
+      "name": "dadosinformados",
+      "text": "Legal, estes são os dados que você informou.\nRazão Social: {{{razaoSocial}}}\nCNPJ : {{{cnpj}}}\nResponsavel: {{{responsavel}}}\nTelefone 1: {{{telefone}}}\nTelefone 2: {{{telefone2}}}\nEmail: {{{email}}}",
+      "next": "emp30"
+    },
+    "emp30": {
+      "id": "emp30",
+      "type": "options",
+      "name": "confirmar",
+      "text": "Esta Correto:",
+      "options": [
+        {
+          "id": "1",
+          "name": "dados_ok",
+          "text": "Sim",
+          "view": true,
+          "descricao": "",
+          "next": "abc39"
+        },
+        {
+          "id": "2",
+          "name": "dados_ok",
+          "text": "Não",
+          "view": true,
+          "descricao": "",
+          "next": "emp31"
+        }
+      ]
+    },
+    "emp31": {
+      "id": "emp31",
+      "type": "options",
+      "text": " Qual informação você Gostaria de Alterar?",
+      "name": "confirmar",
+      "options": [
+        {
+          "id": "1",
+          "name": "razaoSocial",
+          "text": "Razão Social",
+          "view": true,
+          "descricao": "Razão Social",
+          "next": "emp32"
+        },
+        {
+          "id": "2",
+          "name": "cnpj",
+          "text": "Alterar CNPJ",
+          "view": true,
+          "descricao": "CNPJ",
+          "next": "emp33"
+        },
+        {
+          "id": "3",
+          "name": "responsavel",
+          "text": "Alterar Responsavel",
+          "view": true,
+          "descricao": "Responsavel",
+          "next": "emp34"
+        },
+        {
+          "id": "4",
+          "name": "telefone2",
+          "text": "Alterar Telefone 2",
+          "view": true,
+          "descricao": "Telefone 2",
+          "next": "emp35"
+        },
+        {
+          "id": "5",
+          "name": "email",
+          "text": "Alterar Email",
+          "view": true,
+          "descricao": "Email",
+          "next": "emp36"
+        }
+      ]
+    },
+    "emp32": {
+      "id": "emp32",
+      "type": "question",
+      "name": "razaoSocial",
+      "text": "Digite Por Favor a Razão Social (nome) da Sua empresa:",
+      "next": "emp29"
+    },
+    "emp33": {
+      "id": "emp22",
+      "type": "question",
+      "name": "cnpj",
+      "action": {
+        "when": "next",
+        "action": "valida_cnpj"
+      },
+      "text": "Por Favor, digite o cnpj da Sua Empresa (sem pontos ou traço)",
+      "next": "emp29",
+      "err": "empErr005"
+    },
+    "empErr005": {
+      "id": "empErr005",
+      "type": "question",
+      "name": "cnpj",
+      "action": {
+        "when": "next",
+        "action": "valida_cnpj"
+      },
+      "text": "Este Não Parece ser um CNPJ válido, Por Favor, Digite o CNPJ (sem pontos ou traço). \n",
+      "next": "emp29",
+      "err": "empErr005"
+    },
+    "emp34": {
+      "id": "emp34",
+      "type": "question",
+      "name": "responsavel",
+      "text": "Agora preciso saber quem sera o responsavel pela instalação: (_nome - cargo_) ",
+      "next": "emp29"
+    },
+    "emp35": {
+      "id": "emp35",
+      "type": "question",
+      "name": "telefone2",
+      "text": "Preciso que você digite um segundo telefone com DDD.\nNossa central vai ligar pra esse número caso a gente não consiga contato com este numero!",
+      "next": "emp29"
+    },
+    "emp36": {
+      "id": "emp36",
+      "type": "question",
+      "name": "email",
+      "action": {
+        "when": "next",
+        "action": "valida_email"
+      },
+      "text": "Digite seu e-mail.\nVou enviar logo mais os detalhes do seu pedido e também sua conta mensal.",
+      "next": "emp29",
+      "err": "empErr006"
+    },
+    "empErr006": {
+      "id": "empErr006",
+      "type": "question",
+      "name": "email",
+      "action": {
+        "when": "next",
+        "action": "valida_email"
+      },
+      "text": "Este Não Parece ser um Email válido, Por Favor, Digite seu Email.",
+      "next": "emp29",
+      "err": "empErr006"
+    },
+    "abc100": {
+      "id": "abc100",
+      "type": "question",
+      "name": "Fim",
+      "text": "Obrigado Pelas Informações, em breve Entraremos em Contato com Você!",
+      "end": true
+    }
+  }
+}
